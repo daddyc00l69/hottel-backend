@@ -6,30 +6,9 @@ services:
     plan: free
     rootDir: backend
     buildCommand: "npm install"
-    startCommand: "node server.js"
+    startCommand: "node simple-server.js"
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
-      - fromGroup: hottel-secrets
-
-  # MongoDB Service (using Render's managed MongoDB)
-  - type: pserv
-    name: hottel-mongodb
-    runtime: image
-    image:
-      url: mongo:latest
-    plan: free
-    envVars:
-      - key: MONGO_INITDB_DATABASE
-        value: hottel
-    disk:
-      name: hottel-mongo-data
-      mountPath: /data/db
-      sizeGB: 1
-
-databases:
-  # Alternative: Use Render's managed PostgreSQL (recommended)
-  - name: hottel-db
-    plan: free
